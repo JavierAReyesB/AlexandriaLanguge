@@ -22,10 +22,12 @@ import {
   Phone,
   MapPin,
   Send,
-  CheckCircle
+  CheckCircle,
+  Clock
 } from 'lucide-react'
 import Link from 'next/link'
 import Header from '@/components/header'
+import { FaWhatsapp } from 'react-icons/fa'
 
 export default function ContactoPage() {
   const [formData, setFormData] = useState({
@@ -106,8 +108,17 @@ export default function ContactoPage() {
       <Header />
 
       {/* Hero Section */}
-      <section className='relative bg-gradient-to-br from-rose-light via-white to-rose-light/50 py-20 lg:py-32'>
-        <div className='container mx-auto px-4 sm:px-6 lg:px-8'>
+      <section
+        className='relative bg-cover bg-center bg-no-repeat py-20 lg:py-32'
+        style={{
+          backgroundImage:
+            "url('/mujer-primer-plano-smartphone-taza-cafe_23-2148389035.jpg')"
+        }}
+      >
+        {/* Overlay para contraste */}
+        <div className='absolute inset-0 bg-gradient-to-br from-rose-light/80 via-white/70 to-rose-light/60'></div>
+
+        <div className='relative container mx-auto px-4 sm:px-6 lg:px-8'>
           <div className='max-w-4xl mx-auto text-center'>
             <h1 className='text-4xl sm:text-5xl lg:text-6xl font-bold text-charcoal-dark mb-6 leading-tight'>
               Hablemos
@@ -124,7 +135,7 @@ export default function ContactoPage() {
       </section>
 
       {/* Formulario de contacto */}
-      <section className='py-16 lg:py-24 bg-white'>
+      <section className='py-8 lg:py-8 bg-white'>
         <div className='container mx-auto px-4 sm:px-6 lg:px-8'>
           <div className='max-w-6xl mx-auto'>
             <div className='grid lg:grid-cols-2 gap-12 items-start'>
@@ -242,7 +253,7 @@ export default function ContactoPage() {
                               ? 'border-red-500'
                               : 'border-rose-200 focus:border-pastel-red'
                           }`}
-                          placeholder='+34 600 123 456'
+                          placeholder='+34 655 555 555'
                         />
                         {errors.telefono && (
                           <p className='text-red-500 text-sm mt-1'>
@@ -307,46 +318,76 @@ export default function ContactoPage() {
       </section>
 
       {/* Información de contacto */}
-      <section className='py-16 lg:py-24 bg-rose-light/30'>
+      <section className='py-8 lg:py-8 bg-rose-light/30'>
         <div className='container mx-auto px-4 sm:px-6 lg:px-8'>
           <div className='max-w-6xl mx-auto'>
             <h2 className='text-3xl lg:text-4xl font-bold text-charcoal-dark mb-12 text-center'>
               ¡Escríbenos o llámanos cuando quieras!
             </h2>
 
-            <div className='grid grid-cols-1 sm:grid-cols-2 gap-8 justify-center max-w-3xl mx-auto'>
-              <Card className='bg-white border-rose-100 hover:shadow-lg transition-all duration-300'>
-                <CardContent className='p-6 text-center'>
-                  <div className='w-16 h-16 bg-pastel-red/10 rounded-full flex items-center justify-center mx-auto mb-4'>
-                    <Mail className='w-8 h-8 text-pastel-red' />
-                  </div>
-                  <h3 className='text-xl font-semibold text-charcoal-dark mb-2'>
-                    Email
-                  </h3>
-                  <p className='text-charcoal'>
-                    contacto@alexandrialanguage.com
-                  </p>
-                </CardContent>
-              </Card>
+            {/* En móvil mantiene el ancho actual; en desktop quitamos el tope */}
+            <div className='grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl lg:max-w-none mx-auto items-stretch'>
+              {/* Email */}
+              <a
+                href='mailto:contacto@alexandrialanguage.com'
+                className='block h-full'
+              >
+                <Card className='bg-white border-rose-100 hover:shadow-lg transition-all duration-300 cursor-pointer h-full'>
+                  <CardContent className='p-6 text-center h-full'>
+                    <div className='w-16 h-16 bg-pastel-red/10 rounded-full flex items-center justify-center mx-auto mb-4'>
+                      <Mail className='w-8 h-8 text-pastel-red' />
+                    </div>
+                    <h3 className='text-xl font-semibold text-charcoal-dark mb-2'>
+                      Email
+                    </h3>
+                    <p className='text-charcoal'>
+                      Contacto@alexandrialanguage.com
+                    </p>
+                  </CardContent>
+                </Card>
+              </a>
 
-              <Card className='bg-white border-rose-100 hover:shadow-lg transition-all duration-300'>
-                <CardContent className='p-6 text-center'>
-                  <div className='w-16 h-16 bg-pastel-red/10 rounded-full flex items-center justify-center mx-auto mb-4'>
-                    <Phone className='w-8 h-8 text-pastel-red' />
-                  </div>
-                  <h3 className='text-xl font-semibold text-charcoal-dark mb-2'>
-                    Teléfono
-                  </h3>
-                  <p className='text-charcoal'>+34 600 123 456</p>
-                </CardContent>
-              </Card>
+              {/* Teléfono */}
+              <a href='tel:+34654757792' className='block h-full'>
+                <Card className='bg-white border-rose-100 hover:shadow-lg transition-all duration-300 cursor-pointer h-full'>
+                  <CardContent className='p-6 text-center h-full'>
+                    <div className='w-16 h-16 bg-pastel-red/10 rounded-full flex items-center justify-center mx-auto mb-4'>
+                      <Phone className='w-8 h-8 text-pastel-red' />
+                    </div>
+                    <h3 className='text-xl font-semibold text-charcoal-dark mb-2'>
+                      Teléfono
+                    </h3>
+                    <p className='text-charcoal'>+34 654 757 792</p>
+                  </CardContent>
+                </Card>
+              </a>
+
+              {/* WhatsApp */}
+              <a
+                href='https://wa.me/34654757792?text=Hola!%20Me%20gustaría%20recibir%20información%20sobre%20los%20cursos%20de%20inglés%20y%20la%20prueba%20de%20nivel%20gratuita%20de%20Alexandria%20Language.'
+                target='_blank'
+                rel='noopener noreferrer'
+                className='block h-full'
+              >
+                <Card className='bg-white border-rose-100 hover:shadow-lg transition-all duration-300 cursor-pointer h-full'>
+                  <CardContent className='p-6 text-center h-full'>
+                    <div className='w-16 h-16 bg-[#25D366]/10 rounded-full flex items-center justify-center mx-auto mb-4'>
+                      <FaWhatsapp className='w-8 h-8 text-[#25D366]' />
+                    </div>
+                    <h3 className='text-xl font-semibold text-charcoal-dark mb-2'>
+                      WhatsApp
+                    </h3>
+                    <p className='text-charcoal'>+34 654 757 792</p>
+                  </CardContent>
+                </Card>
+              </a>
             </div>
           </div>
         </div>
       </section>
 
       {/* FAQ Section */}
-      <section className='py-16 lg:py-24 bg-white'>
+      <section className='py-8 lg:py-8 bg-white'>
         <div className='container mx-auto px-4 sm:px-6 lg:px-8'>
           <div className='max-w-4xl mx-auto'>
             <h2 className='text-3xl lg:text-4xl font-bold text-charcoal-dark mb-12 text-center'>
@@ -390,20 +431,6 @@ export default function ContactoPage() {
                 className='border border-rose-100 rounded-lg px-6'
               >
                 <AccordionTrigger className='text-left text-charcoal-dark hover:text-pastel-red'>
-                  ¿Entregan certificados?
-                </AccordionTrigger>
-                <AccordionContent className='text-charcoal'>
-                  Sí, al finalizar cada nivel recibirás un certificado oficial
-                  del centro que acredita tu nivel de inglés según el Marco
-                  Común Europeo de Referencia para las Lenguas (MCER).
-                </AccordionContent>
-              </AccordionItem>
-
-              <AccordionItem
-                value='item-4'
-                className='border border-rose-100 rounded-lg px-6'
-              >
-                <AccordionTrigger className='text-left text-charcoal-dark hover:text-pastel-red'>
                   ¿Cómo sé cuál es mi nivel de inglés?
                 </AccordionTrigger>
                 <AccordionContent className='text-charcoal'>
@@ -415,7 +442,7 @@ export default function ContactoPage() {
               </AccordionItem>
 
               <AccordionItem
-                value='item-5'
+                value='item-4'
                 className='border border-rose-100 rounded-lg px-6'
               >
                 <AccordionTrigger className='text-left text-charcoal-dark hover:text-pastel-red'>
@@ -424,8 +451,8 @@ export default function ContactoPage() {
                 <AccordionContent className='text-charcoal'>
                   Puedes recuperar el contenido con apoyo del profesor o
                   mediante recursos online. Además, proporcionamos material de
-                  apoyo y grabaciones de las clases online para que no te
-                  pierdas ningún contenido importante.
+                  apoyo clases online para que no te pierdas ningún contenido
+                  importante.
                 </AccordionContent>
               </AccordionItem>
             </Accordion>
@@ -434,18 +461,36 @@ export default function ContactoPage() {
       </section>
 
       {/* Llamada a la acción final */}
-      <section className='py-16 lg:py-24 bg-charcoal'>
+      <section className='py-12 lg:py-16 bg-[#1e1e1e]'>
         <div className='container mx-auto px-4 sm:px-6 lg:px-8'>
-          <div className='max-w-3xl mx-auto text-center'>
-            <h2 className='text-3xl lg:text-4xl font-bold text-white mb-6'>
+          <div className='max-w-3xl mx-auto text-center flex flex-col items-center'>
+            {/* Título */}
+            <h2 className='text-3xl lg:text-4xl font-bold text-white mb-8'>
               Tu inglés puede cambiar tu futuro. Da el primer paso hoy.
             </h2>
-            <Button
-              size='lg'
-              className='bg-white text-pastel-red hover:bg-gray-50 px-8 py-4 text-lg font-semibold rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg'
-            >
-              Solicitar prueba de nivel gratuita
-            </Button>
+
+            {/* Aviso sobre el botón */}
+            <div className='bg-[#E57373]/20 border border-[#E57373]/30 rounded-lg px-4 py-3 mb-6 flex items-center gap-2'>
+              <Clock className='w-4 h-4 text-[#E57373]' />
+              <span className='text-sm font-medium text-white'>
+                Plazas limitadas este mes
+              </span>
+            </div>
+
+            {/* Botón CTA */}
+            <Link href='/contacto'>
+              <Button
+                size='lg'
+                className='bg-white text-pastel-red hover:bg-gray-50 px-8 py-4 text-lg font-semibold rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg'
+              >
+                Solicitar prueba de nivel gratuita
+              </Button>
+            </Link>
+
+            {/* Texto de confianza */}
+            <p className='text-gray-400 text-sm mt-4'>
+              Respuesta en menos de 24 horas • Sin compromiso
+            </p>
           </div>
         </div>
       </section>
@@ -453,7 +498,7 @@ export default function ContactoPage() {
       {/* Footer */}
       <footer className='bg-charcoal-dark text-white py-12'>
         <div className='container mx-auto px-4 sm:px-6 lg:px-8'>
-          <div className='grid md:grid-cols-4 gap-8'>
+          <div className='grid md:grid-cols-4 gap-8 text-center md:text-left'>
             {/* Logo and description */}
             <div className='md:col-span-2'>
               <h3 className='text-2xl font-bold mb-4'>Alexandria Language</h3>
@@ -498,20 +543,20 @@ export default function ContactoPage() {
             <div>
               <h4 className='font-semibold mb-4'>Contacto</h4>
               <div className='space-y-2'>
-                <div className='flex items-center space-x-2'>
+                <div className='flex items-center justify-center md:justify-start space-x-2'>
                   <Mail className='w-4 h-4' />
                   <span className='text-gray-300'>
                     contacto@alexandrialanguage.com
                   </span>
                 </div>
-                <div className='flex items-center space-x-2'>
+                <div className='flex items-center justify-center md:justify-start space-x-2'>
                   <Phone className='w-4 h-4' />
-                  <span className='text-gray-300'>+34 600 123 456</span>
+                  <span className='text-gray-300'>+34 654 757 792</span>
                 </div>
               </div>
 
               {/* Social Media */}
-              <div className='flex space-x-4 mt-6'>
+              <div className='flex justify-center md:justify-start space-x-4 mt-6'>
                 <Button
                   variant='ghost'
                   size='sm'
